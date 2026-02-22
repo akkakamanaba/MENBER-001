@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEATH STORE</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:linear-gradient(135deg,#1a001f,#000);
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+background:#111;
+padding:40px;
+border-radius:12px;
+width:340px;
+text-align:center;
+box-shadow:0 0 25px rgba(155,0,255,0.4);
+}
+
+h1{
+color:#b84dff;
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border:none;
+border-radius:6px;
+}
+
+button{
+width:100%;
+padding:10px;
+border:none;
+border-radius:6px;
+background:#7a00cc;
+color:white;
+cursor:pointer;
+font-weight:bold;
+}
+
+button:hover{
+background:#9d33ff;
+}
+
+#painel{display:none;}
+#msg{margin-top:15px;}
+</style>
+</head>
+
+<body>
+
+<div class="box" id="login">
+<h1>DEATH STORE</h1>
+<input type="text" id="key" placeholder="Digite sua KEY">
+<button onclick="entrar()">Entrar</button>
+<div id="erro" style="color:red;margin-top:10px;"></div>
+</div>
+
+<div class="box" id="painel">
+<h1>GERAR PRÊMIO</h1>
+<button onclick="gerar()">GIRAR</button>
+<div id="msg"></div>
+</div>
+
+<script>
+
+// KEYS QUE FUNCIONAM PARA LOGIN
+const KEYS = ["ACESSO-001","ACESSO-002","ACESSO-003"];
+
+function entrar(){
+let k = document.getElementById("key").value.trim();
+
+if(!KEYS.includes(k)){
+document.getElementById("erro").innerText = "Key inválida";
+return;
+}
+
+if(localStorage.getItem("used_"+k)){
+document.getElementById("erro").innerText = "Essa key já foi usada";
+return;
+}
+
+localStorage.setItem("used_"+k,"sim");
+document.getElementById("login").style.display="none";
+document.getElementById("painel").style.display="block";
+}
+
+function gerar(){
+
+if(localStorage.getItem("premio")){
+document.getElementById("msg").innerText="Você já pegou seu prêmio";
+return;
+}
+
+let chance = Math.random();
+let premio;
+
+if(chance <= 0.01){
+premio = "UNICO-" + codigo();
+}
+else if(chance <= 0.51){
+premio = "DEATH-" + codigo();
+}
+else{
+premio = "STORE-" + codigo();
+}
+
+localStorage.setItem("premio",premio);
+document.getElementById("msg").innerHTML="<br><b>Sua Key:</b><br>"+premio;
+}
+
+function codigo(){
+return Math.random().toString(36).substring(2,8).toUpperCase();
+}
+
+</script>
+
+</body>
+</html>
