@@ -108,13 +108,13 @@ let chance = Math.random();
 let premio;
 
 if(chance <= 0.01){
-premio = "UNICO-" + codigo();
+premio = "nada-" + parabens();
 }
 else if(chance <= 0.51){
-premio = "DEATH-" + codigo();
+premio = "500k-" + parabens();
 }
 else{
-premio = "STORE-" + codigo();
+premio = "1m-" + parabens();
 }
 
 localStorage.setItem("premio",premio);
