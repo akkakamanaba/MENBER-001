@@ -77,7 +77,7 @@ background:#9d33ff;
 <script>
 
 // KEYS QUE FUNCIONAM PARA LOGIN
-const KEYS = ["ACESSO-022","ACESSO-002","ACESSO-004"];
+const KEYS = ["ACESSO-008","ACESSO-001","ACESSO-000"];
 
 function entrar(){
 let k = document.getElementById("key").value.trim();
@@ -108,13 +108,13 @@ let chance = Math.random();
 let premio;
 
 if(chance <= 0.01){
-premio = "nada-" + parabens();
+premio = "nada-" + codigo();
 }
 else if(chance <= 0.51){
-premio = "500k-" + parabens();
+premio = "500k-" + codigo();
 }
 else{
-premio = "1m-" + parabens();
+premio = "1m-" + codigo();
 }
 
 localStorage.setItem("premio",premio);
